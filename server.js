@@ -23,11 +23,7 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/", (req, res) => {
-  db.select("*")
-    .table("users")
-    .then((data) => {
-      res.send(data);
-    });
+  res.send("Working and waiting");
 });
 
 app.post("/signin", (req, res) => signin.handleSignin(req, res, db, bcrypt));
@@ -42,6 +38,6 @@ app.put("/image", (req, res) => image.handleImage(req, res, db));
 app.post("/imageurl", (req, res) => image.handleApiCall(req, res));
 
 const PORT = process.env.PORT;
-app.listen(PORT, () => {
+app.listen(PORT || 3001, () => {
   console.log(`listening to port ${PORT}`);
 });
